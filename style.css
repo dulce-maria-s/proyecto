@@ -1,0 +1,217 @@
+/* =========================================
+   1. VARIABLES Y RESET
+   ========================================= */
+:root {
+    --bb-sidebar-bg: #262626;
+    --bb-sidebar-text: #f0f0f0;
+    --bb-primary-blue: #003366;
+    --bb-accent-green: #28a745;
+    --bb-accent-hover: #218838;
+    --bb-bg-body: #f4f6f9;
+    --bb-card-bg: #ffffff;
+    --bb-border: #e0e0e0;
+    --bb-text: #333333;
+    --sidebar-width: 260px;
+    --header-height: 60px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bb-bg-body);
+    color: var(--bb-text);
+    display: flex;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* =========================================
+   2. SIDEBAR
+   ========================================= */
+.sidebar {
+    width: var(--sidebar-width);
+    background-color: var(--bb-sidebar-bg);
+    color: var(--bb-sidebar-text);
+    height: 100vh;
+    position: fixed;
+    left: 0; top: 0;
+    display: flex; flex-direction: column;
+    z-index: 1000;
+    transition: transform 0.3s ease;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+}
+
+.sidebar-header {
+    height: var(--header-height);
+    background-color: #1a1a1a;
+    display: flex; align-items: center; padding: 0 20px;
+    border-bottom: 1px solid #333;
+    font-weight: bold; font-size: 1.1rem; letter-spacing: 1px;
+}
+.sidebar-header i { color: var(--bb-accent-green); margin-right: 10px; }
+
+.nav-links { list-style: none; padding: 20px 0; overflow-y: auto; }
+.nav-label { padding: 10px 20px; font-size: 0.75rem; text-transform: uppercase; color: #888; font-weight: bold; }
+
+.nav-links li a {
+    display: flex; align-items: center; padding: 12px 20px; color: #ccc;
+    text-decoration: none; border-left: 4px solid transparent; transition: all 0.2s; font-size: 0.95rem;
+}
+.nav-links li a:hover { background-color: #333; color: white; }
+.nav-links li a.active { background-color: #333; color: white; border-left-color: var(--bb-accent-green); font-weight: 600; }
+.nav-links li a i { width: 25px; text-align: center; margin-right: 10px; }
+
+/* =========================================
+   3. MAIN CONTENT
+   ========================================= */
+.main-content {
+    flex: 1; margin-left: var(--sidebar-width); display: flex; flex-direction: column;
+    transition: margin-left 0.3s ease; width: 100%;
+}
+
+.top-header {
+    height: var(--header-height); background-color: var(--bb-primary-blue); color: white;
+    display: flex; align-items: center; justify-content: space-between; padding: 0 20px;
+    position: sticky; top: 0; z-index: 900; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.menu-toggle { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
+.course-info h1 { font-size: 1.2rem; margin: 0; font-weight: 600; }
+.course-info span { font-size: 0.8rem; opacity: 0.8; display: block; }
+
+.content-container { padding: 30px; max-width: 1200px; width: 100%; margin: 0 auto; }
+.section { display: none; animation: fadeIn 0.4s ease; }
+.section.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* =========================================
+   4. COMPONENTES ESTÁNDAR
+   ========================================= */
+.module-header-title {
+    font-size: 1.5rem; color: var(--bb-primary-blue); padding-bottom: 10px;
+    border-bottom: 2px solid #ccc; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
+}
+
+.bb-item {
+    background-color: var(--bb-card-bg); border: 1px solid var(--bb-border);
+    border-left: 5px solid var(--bb-primary-blue); padding: 20px; margin-bottom: 20px;
+    border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); display: flex; gap: 20px; flex-wrap: wrap;
+}
+.bb-item.assignment { border-left-color: #ffc107; }
+
+.item-icon { font-size: 2rem; color: #555; min-width: 50px; text-align: center; }
+.item-content { flex: 1; min-width: 250px; }
+.item-title { font-size: 1.2rem; color: var(--bb-primary-blue); margin-bottom: 5px; font-weight: 600; }
+.item-desc { font-size: 0.95rem; color: #555; line-height: 1.5; margin-bottom: 15px; }
+.video-intro { background-color: #f8f9fa; border-left: 3px solid #6c757d; padding: 10px 15px; margin-bottom: 15px; font-style: italic; color: #555; font-size: 0.9rem; }
+
+.btn-green {
+    display: inline-block; background-color: var(--bb-accent-green); color: white;
+    padding: 8px 16px; text-decoration: none; border-radius: 4px; font-size: 0.9rem;
+    font-weight: 600; transition: background 0.3s; border: none; cursor: pointer;
+}
+.btn-green:hover { background-color: var(--bb-accent-hover); }
+.btn-green:disabled { background-color: #ccc; cursor: not-allowed; }
+
+.media-responsive {
+    position: relative; padding-bottom: 56.25%; height: 0; background: #000;
+    border-radius: 4px; margin-top: 10px; overflow: hidden;
+}
+.media-responsive iframe, .media-responsive embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+
+.pdf-preview { height: 500px; background-color: #f4f4f4; border: 1px solid #ddd; margin-bottom: 15px;}
+
+/* TABLA DE CALIFICACIONES */
+.grades-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+.grades-table th, .grades-table td { text-align: left; padding: 12px; border-bottom: 1px solid #e0e0e0; }
+.grades-table th { background-color: #f4f6f9; color: var(--bb-primary-blue); }
+.grade-pill { display: inline-block; padding: 4px 8px; border-radius: 12px; font-size: 0.85rem; font-weight: bold; }
+.grade-pill.pending { background-color: #fff3e0; color: #ef6c00; }
+.grade-pill.submitted { background-color: #e8f5e9; color: #2e7d32; }
+
+/* =========================================
+   5. ESTILOS DEL FORO
+   ========================================= */
+.forum-thread {
+    border: 1px solid #e0e0e0; border-radius: 4px; margin-bottom: 15px; background: white;
+}
+.thread-header {
+    background-color: #f8f9fa; padding: 10px 15px; border-bottom: 1px solid #e0e0e0;
+    display: flex; justify-content: space-between; align-items: center;
+}
+.thread-title { color: var(--bb-primary-blue); font-weight: bold; font-size: 1rem; }
+.thread-meta { font-size: 0.8rem; color: #666; }
+.thread-body { padding: 15px; font-size: 0.95rem; color: #333; line-height: 1.5; }
+.thread-actions { padding: 10px 15px; border-top: 1px solid #f0f0f0; text-align: right; }
+.btn-reply { background: none; border: 1px solid var(--bb-primary-blue); color: var(--bb-primary-blue); padding: 5px 10px; border-radius: 3px; cursor: pointer; font-size: 0.8rem;}
+.btn-reply:hover { background: var(--bb-primary-blue); color: white; }
+
+/* Estilos para el formulario de respuesta del foro */
+.reply-form {
+    display: none; /* Oculto por defecto */
+    padding: 15px;
+    background-color: #f1f1f1;
+    margin-top: 10px;
+    border-radius: 4px;
+}
+.reply-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+/* Estilo para las respuestas anidadas */
+.forum-reply {
+    margin-left: 20px;
+    margin-top: 10px;
+    border-left: 3px solid #ddd;
+    padding-left: 10px;
+    background-color: #fafafa;
+    padding: 10px;
+    border-radius: 0 4px 4px 0;
+}
+.reply-meta {
+    font-size: 0.75rem;
+    color: #888;
+    margin-bottom: 5px;
+    display: block;
+}
+
+
+/* =========================================
+   6. ESTILOS DEL QUIZ (MODAL)
+   ========================================= */
+.modal-overlay {
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6); z-index: 2000; justify-content: center; align-items: center;
+}
+.modal-content {
+    background: white; padding: 30px; border-radius: 5px; width: 90%; max-width: 600px;
+    max-height: 90vh; overflow-y: auto; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    border-top: 5px solid var(--bb-primary-blue);
+}
+.modal-header { display: flex; justify-content: space-between; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+.modal-header h3 { color: var(--bb-primary-blue); margin: 0; }
+.close-modal { background: none; border: none; font-size: 1.5rem; cursor: pointer; }
+
+.quiz-question { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px dashed #eee; }
+.quiz-question p { font-weight: bold; margin-bottom: 10px; color: #333; }
+.quiz-option { display: block; margin-bottom: 8px; cursor: pointer; font-size: 0.95rem; }
+.quiz-option input { margin-right: 10px; }
+
+/* =========================================
+   7. RESPONSIVE
+   ========================================= */
+@media (max-width: 768px) {
+    .sidebar { transform: translateX(-100%); }
+    .sidebar.show { transform: translateX(0); }
+    .main-content { margin-left: 0; }
+    .menu-toggle { display: block; }
+    .bb-item { flex-direction: column; gap: 10px; }
+    .content-container { padding: 15px; }
+    .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 950; }
+    .overlay.show { display: block; }
+}
